@@ -20,8 +20,7 @@ func Decider(request *http.Request) bool {
 		go func(limiter *model.RateLimiter) {
 			defer wg.Done()
 			// Call EvaluateRequest for each RateLimiter and send the result to the channel
-			result := limiter.EvaluateRequest(request)
-			resultChannel <- result
+			resultChannel <- limiter.EvaluateRequest(request)
 		}(limiter)
 	}
 
