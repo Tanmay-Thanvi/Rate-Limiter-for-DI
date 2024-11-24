@@ -1,7 +1,7 @@
 package implementation
 
 import (
-	"RateLimiter/rate_limiter/logs"
+	logs "RateLimiter/rate_limiter/Logs"
 	"net/http"
 	"time"
 )
