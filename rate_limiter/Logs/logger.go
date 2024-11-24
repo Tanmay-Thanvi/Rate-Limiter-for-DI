@@ -10,6 +10,6 @@ var (
 	Error *log.Logger
 )
 
-func Log(request *http.Request) {
+func LogRequest(request *http.Request) {
 	Info.Println("Request : & Reject Reason need to be handled !", request)
 }

@@ -2,9 +2,9 @@ package main
 
 import (
 	ratelimiter "RateLimiter/rate_limiter"
+	logs "RateLimiter/rate_limiter/Logs"
 	Errors "RateLimiter/rate_limiter/errors"
 	"RateLimiter/rate_limiter/limiter"
-	logs "RateLimiter/rate_limiter/logs"
 	"fmt"
 	"log"
 	"net/http"
@@ -30,7 +30,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 			Log request to kibana for network forensics
 			& send 429 status code to client
 		*/
-		logs.Log(r)
+		logs.LogRequest(r)
 		http.Error(w, "Request denied", http.StatusTooManyRequests)
 	}
 }
