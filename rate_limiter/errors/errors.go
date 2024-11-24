@@ -1,7 +1,7 @@
 package Errors
 
 import (
-	logs "RateLimiter/rate_limiter/Logs"
+	logger "RateLimiter/rate_limiter/Logs"
 	"errors"
 )
 
@@ -21,7 +21,7 @@ func HandleErr(params Params) {
 			params.Message = "No Message Provided"
 		}
 
-		logs.Error.Printf("Message : %v \nErr : %v\n", params.Message, params.Err.Error())
+		logger.Error("Message : %v \nErr : %v\n", params.Message, params.Err.Error())
 
 		if params.IsBlocking {
 			panic(params.Err)

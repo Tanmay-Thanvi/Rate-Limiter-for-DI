@@ -1,7 +1,7 @@
 package implementation
 
 import (
-	logs "RateLimiter/rate_limiter/Logs"
+	logger "RateLimiter/rate_limiter/Logs"
 	"net/http"
 	"time"
 )
@@ -21,6 +21,6 @@ func NewSlidingWindow( /* Rate Limiter Configs */ ) (*slidingWindow, error) {
 }
 
 func (*slidingWindow) AllowRequest(Request *http.Request) (bool, error) {
-	logs.Info.Println("Sliding Window Rate Limiting Strategy implemented !")
+	logger.Info("Sliding Window Rate Limiting Strategy implemented !")
 	return true, nil
 }

@@ -1,7 +1,7 @@
 package ratelimiter
 
 import (
-	logs "RateLimiter/rate_limiter/Logs"
+	logger "RateLimiter/rate_limiter/Logs"
 	"RateLimiter/rate_limiter/limiter"
 	"RateLimiter/rate_limiter/model"
 	"net/http"
@@ -37,7 +37,7 @@ func Decider(request *http.Request) bool {
 		}
 	}
 
-	logs.Info.Println("True Count : ", trueCount)
+	logger.Info("True Count : ", trueCount)
 
 	return trueCount > 0
 }
