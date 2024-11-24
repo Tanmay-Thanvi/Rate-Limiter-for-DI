@@ -13,6 +13,6 @@ type RateLimiter struct {
 
 func (RL *RateLimiter) EvaluateRequest(request *http.Request) bool {
 	isAllowed, err := RL.Algorithm.AllowRequest(request)
-	Errors.HandleErr(err, "Unable to evaluate Request")
+	Errors.HandleErr(Errors.Params{Err: err, Message: "Unable to evaluate Request", IsBlocking: true})
 	return isAllowed
 }

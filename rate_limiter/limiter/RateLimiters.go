@@ -13,7 +13,7 @@ var allRateLimiters = make(RateLimitersMap)
 func initialize() {
 	for _, Level := range Levels {
 		algorithm, err := algorithms.NewRLAlgorithm(LimiterAlgoMapping[Level])
-		Errors.HandleErr(err, "Algorithm Unavailable !")
+		Errors.HandleErr(Errors.Params{Err: err, Message: "Algorithm Unavailable !", IsBlocking: true})
 
 		allRateLimiters[Level] = &model.RateLimiter{
 			Config:    "abcd",

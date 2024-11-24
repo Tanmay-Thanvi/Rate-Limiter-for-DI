@@ -30,5 +30,5 @@ func main() {
 	// Start the server on port 4000
 	fmt.Println("Server is running on http://localhost:4000/")
 	err := http.ListenAndServe(":4000", nil)
-	Errors.HandleErr(err, "Error starting server !")
+	Errors.HandleErr(Errors.Params{Err: err, Message: "Error starting server !", IsBlocking: true})
 }
