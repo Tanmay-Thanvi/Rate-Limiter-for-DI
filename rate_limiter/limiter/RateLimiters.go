@@ -11,7 +11,7 @@ type RateLimitersMap map[Level]*model.RateLimiter
 
 var allRateLimiters = make(RateLimitersMap)
 
-func Initialize() {
+func init() {
 	logs.Info.Println("Initializing All Rate Limiters !")
 	for _, Level := range Levels {
 		algorithm, err := algorithms.NewRLAlgorithm(LimiterAlgoMapping[Level])

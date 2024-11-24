@@ -4,21 +4,9 @@ import (
 	ratelimiter "RateLimiter/rate_limiter"
 	logs "RateLimiter/rate_limiter/Logs"
 	Errors "RateLimiter/rate_limiter/errors"
-	"RateLimiter/rate_limiter/limiter"
 	"fmt"
-	"log"
 	"net/http"
-	"os"
 )
-
-func init() {
-	// Logger Setup
-	logs.Info = log.New(os.Stdout, "INFO: ", log.Ldate|log.Ltime|log.Lshortfile)
-	logs.Error = log.New(os.Stderr, "ERROR: ", log.Ldate|log.Ltime|log.Lshortfile)
-
-	// Rate Limiting Initialization
-	limiter.Initialize()
-}
 
 // Handler function to process requests if the Decider allows it
 func handler(w http.ResponseWriter, r *http.Request) {
