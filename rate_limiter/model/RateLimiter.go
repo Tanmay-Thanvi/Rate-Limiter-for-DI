@@ -1,7 +1,8 @@
-package limiter
+package model
 
 import (
 	algo "RateLimiter/rate_limiter/algorithms"
+	Errors "RateLimiter/rate_limiter/errors"
 	"net/http"
 )
 
@@ -12,8 +13,6 @@ type RateLimiter struct {
 
 func (RL *RateLimiter) EvaluateRequest(request *http.Request) bool {
 	isAllowed, err := RL.Algorithm.AllowRequest(request)
-	if err != nil {
-		panic(err)
-	}
+	Errors.HandleErr(err, "Unable to evaluate Request")
 	return isAllowed
 }

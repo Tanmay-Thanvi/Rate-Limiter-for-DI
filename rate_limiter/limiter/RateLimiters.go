@@ -1,20 +1,21 @@
 package limiter
 
-import "RateLimiter/rate_limiter/algorithms"
+import (
+	"RateLimiter/rate_limiter/algorithms"
+	Errors "RateLimiter/rate_limiter/errors"
+	"RateLimiter/rate_limiter/model"
+)
 
-type RateLimitersMap map[Level]*RateLimiter
+type RateLimitersMap map[Level]*model.RateLimiter
 
 var allRateLimiters = make(RateLimitersMap)
 
-func init() {
+func initialize() {
 	for _, Level := range Levels {
-
 		algorithm, err := algorithms.NewRLAlgorithm(LimiterAlgoMapping[Level])
-		if err != nil {
-			panic(err)
-		}
+		Errors.HandleErr(err, "Algorithm Unavailable !")
 
-		allRateLimiters[Level] = &RateLimiter{
+		allRateLimiters[Level] = &model.RateLimiter{
 			Config:    "abcd",
 			Algorithm: algorithm,
 		}
@@ -22,5 +23,6 @@ func init() {
 }
 
 func GetAllRateLimiters() RateLimitersMap {
+	initialize()
 	return allRateLimiters
 }
