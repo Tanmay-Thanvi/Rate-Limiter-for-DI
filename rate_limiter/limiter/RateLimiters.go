@@ -4,13 +4,15 @@ import (
 	"RateLimiter/rate_limiter/algorithms"
 	Errors "RateLimiter/rate_limiter/errors"
 	"RateLimiter/rate_limiter/model"
+	"log"
 )
 
 type RateLimitersMap map[Level]*model.RateLimiter
 
 var allRateLimiters = make(RateLimitersMap)
 
-func initialize() {
+func Initialize() {
+	log.Println("Initializing All Rate Limiters !")
 	for _, Level := range Levels {
 		algorithm, err := algorithms.NewRLAlgorithm(LimiterAlgoMapping[Level])
 		Errors.HandleErr(Errors.Params{Err: err, Message: "Algorithm Unavailable !", IsBlocking: true})
@@ -23,6 +25,5 @@ func initialize() {
 }
 
 func GetAllRateLimiters() RateLimitersMap {
-	initialize()
 	return allRateLimiters
 }

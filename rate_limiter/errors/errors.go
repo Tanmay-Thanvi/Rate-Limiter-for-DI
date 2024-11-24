@@ -2,7 +2,7 @@ package Errors
 
 import (
 	"errors"
-	"fmt"
+	"log"
 )
 
 var (
@@ -21,7 +21,7 @@ func HandleErr(params Params) {
 			params.Message = "No Message Provided"
 		}
 
-		fmt.Printf("Message : %v \nErr : %v\n", params.Message, params.Err.Error())
+		log.Printf("Message : %v \nErr : %v\n", params.Message, params.Err.Error())
 
 		if params.IsBlocking {
 			panic(params.Err)
