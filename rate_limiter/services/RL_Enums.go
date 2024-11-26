@@ -1,4 +1,4 @@
-package limiter
+package service
 
 type Level int
 

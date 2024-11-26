@@ -1,4 +1,4 @@
-package limiter
+package service
 
 import (
 	logger "RateLimiter/rate_limiter/Logs"
@@ -13,8 +13,9 @@ var allRateLimiters = make(RateLimitersMap)
 
 func init() {
 	logger.Info("Initializing All Rate Limiters !")
+
 	for _, Level := range Levels {
-		algorithm, err := algorithms.NewRLAlgorithm(LimiterAlgoMapping[Level])
+		algorithm, err := algorithms.NewRLAlgorithm(LevelRLAlgoMapping[Level])
 		Errors.HandleErr(Errors.Params{Err: err, Message: "Algorithm Unavailable !", IsBlocking: true})
 
 		allRateLimiters[Level] = &model.RateLimiter{

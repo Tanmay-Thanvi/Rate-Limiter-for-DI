@@ -2,14 +2,14 @@ package ratelimiter
 
 import (
 	logger "RateLimiter/rate_limiter/Logs"
-	"RateLimiter/rate_limiter/limiter"
 	"RateLimiter/rate_limiter/model"
+	service "RateLimiter/rate_limiter/services"
 	"net/http"
 	"sync"
 )
 
 func Decider(request *http.Request) bool {
-	allLimiters := limiter.GetAllRateLimiters()
+	allLimiters := service.GetAllRateLimiters()
 	var wg sync.WaitGroup
 	resultChannel := make(chan bool, len(allLimiters))
 	trueCount := 0
@@ -30,14 +30,19 @@ func Decider(request *http.Request) bool {
 	// Close the resultChannel after all goroutines are done
 	close(resultChannel)
 
+	// Decision parameter
+	acceptReq := true
+
 	// Count how many times the result was true
 	for result := range resultChannel {
-		if result {
+		if !result {
+			acceptReq = false
+		} else {
 			trueCount++
 		}
 	}
 
 	logger.Info("True Count : ", trueCount)
 
-	return trueCount > 0
+	return acceptReq
 }
