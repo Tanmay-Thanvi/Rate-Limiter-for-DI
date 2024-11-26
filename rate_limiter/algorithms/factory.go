@@ -8,7 +8,7 @@ import (
 func NewRLAlgorithm(algoType Algorithm /* & Config Values for algo */) (RLAlgorithm, error) {
 	switch algoType {
 
-	case Fixed_Counter, Sliding_Window, Token_Bucket: // for now
+	case Sliding_Window: // for now
 		return impl.NewSlidingWindow()
 	default:
 		return nil, Errors.ErrUnsupportedAlgo
