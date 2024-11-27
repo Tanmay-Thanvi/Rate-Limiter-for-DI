@@ -42,7 +42,10 @@ func Decider(request *http.Request) bool {
 		}
 	}
 
-	logger.Info("True Count : ", trueCount)
+	// Log request to kibana for monitoring
+	if !acceptReq {
+		logger.Info("True Count : ", trueCount)
+	}
 
 	return acceptReq
 }
