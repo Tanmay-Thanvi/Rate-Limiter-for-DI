@@ -3,8 +3,8 @@ package service
 import algo "RateLimiter/rate_limiter/algorithms"
 
 /*
-This map needs to be completed i.e
-all algos should be present for all levels
+This map will be pulled from DB on init only i.e
+all algos will be mapped for all levels
 */
 var LevelRLAlgoMapping = map[Level]algo.Algorithm{
 	Organization: algo.Sliding_Window,

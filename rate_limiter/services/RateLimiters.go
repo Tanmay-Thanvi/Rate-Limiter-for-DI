@@ -19,7 +19,7 @@ func init() {
 		Errors.HandleErr(Errors.Params{Err: err, Message: "Algorithm Unavailable !", IsBlocking: true})
 
 		allRateLimiters[Level] = &model.RateLimiter{
-			Config:    "abcd",
+			Config:    "abcd", // will be pulled from DB or cache
 			Algorithm: algorithm,
 		}
 	}
